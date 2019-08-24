@@ -53,6 +53,7 @@ class ParkingBoyFacts {
 
         ParkingTicket ticket = parkingBoy.park(car);
 
+        assertNull(parkingBoy.fetch(null));
         assertNull(parkingBoy.fetch(wrongTicket));
         assertSame(car, parkingBoy.fetch(ticket));
     }

@@ -25,11 +25,16 @@ public class ParkingLot {
     }
     public Car fetchCar(ParkingTicket ticket){
         Car car=null;
-        for(Map.Entry carTicketMap:cars.entrySet()){
-            if(carTicketMap.getKey() == ticket){
-                car=cars.get(ticket);
+        if(ticket == null){
+            return  null;
+        }else{
+            for(Map.Entry carTicketMap:cars.entrySet()){
+                if(carTicketMap.getKey() == ticket){
+                    car=cars.get(ticket);
+                }
             }
         }
+
         return car;
 
     }
