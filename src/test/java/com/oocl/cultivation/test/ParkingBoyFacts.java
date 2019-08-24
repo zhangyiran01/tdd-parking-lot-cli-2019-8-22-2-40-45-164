@@ -6,6 +6,10 @@ import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyFacts {
@@ -157,8 +161,27 @@ class ParkingBoyFacts {
         );
     }
 
+    //story 3
+    @Test
+    void should_park_to_mutiple_parkingLots(){
+        List<ParkingLot> parkingLots=new ArrayList<>();
+        ParkingLot parkingLot1=new ParkingLot(1);
+        ParkingLot parkingLot2=new ParkingLot(1);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        ParkingBoy parkingBoy=new ParkingBoy(parkingLots);
 
-    
+        Car car1=new Car();
+        Car car2=new Car();
+        ArrayList<Car> carList=new ArrayList<Car>();
+        carList.add(car1);
+        carList.add(car2);
+        Map resultMap=parkingBoy.park(carList);
+        assertSame(parkingLot1,resultMap.get(car1));
+        assertSame(parkingLot2,resultMap.get(car2));
+
+    }
+
 }
 
 

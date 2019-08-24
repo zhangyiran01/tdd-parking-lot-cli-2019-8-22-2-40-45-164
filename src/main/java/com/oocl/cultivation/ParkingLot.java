@@ -5,7 +5,16 @@ import java.util.Map;
 
 public class ParkingLot {
     private final int capacity;
-    private  static  int size=0;
+    private  int size=0;
+
+    public Map<ParkingTicket, Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Map<ParkingTicket, Car> cars) {
+        this.cars = cars;
+    }
+
     private Map<ParkingTicket, Car> cars = new HashMap<>();
 
     public ParkingLot() {
