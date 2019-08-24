@@ -43,7 +43,7 @@ class ParkingBoyFacts {
         assertSame(secondCar, fetchedBySecondTicket);
     }
 
-    //story1 AC3 AC4
+    //story1 AC3
     @Test
     void should_not_fetch_any_car_once_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
@@ -57,25 +57,31 @@ class ParkingBoyFacts {
         assertNull(parkingBoy.fetch(wrongTicket));
         assertSame(car, parkingBoy.fetch(ticket));
 
-        //如果客户提供已经使用的票证，不应取车
-        Car car2=parkingBoy.fetch(ticket);
-        assertNull(car2);
+    }
+
+    //story1 AC4
+    @Test
+    void should_not_fetch_any_car_once_ticket_has_been_used() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car = new Car();
+
+        ParkingTicket ticket = parkingBoy.park(car);
+        parkingBoy.fetch(ticket);
+
+        assertNull(parkingBoy.fetch(ticket));
     }
 
     //story1 AC5
     @Test
-    void should_not_park_if_capacity_not_enough(){
-        ParkingLot parkingLot=new ParkingLot();
-        ParkingBoy parkingBoy=new ParkingBoy(parkingLot);
-        Car car1=new Car();
-        Car car2=new Car();
-        Car car3=new Car();
-        ParkingTicket car1Ticket=parkingBoy.park(car1);
-        ParkingTicket car2Ticket=parkingBoy.park(car2);
-        assertNull(parkingBoy.park(car3));
+    void should_not_park_cars_to_parking_lot_if_there_is_not_enough_position() {
+        final int capacity = 1;
+        ParkingLot parkingLot = new ParkingLot(capacity);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
-        parkingBoy.fetch(car1Ticket);
-        assertNotNull(parkingBoy.park(car3));
+        parkingBoy.park(new Car());
+
+        assertNull(parkingBoy.park(new Car()));
     }
 
     //story2 AC1
@@ -101,25 +107,24 @@ class ParkingBoyFacts {
         parkingBoy.fetch(null);
 
         assertEquals(
-            "Please provide your parking ticket.",
-            parkingBoy.getLastErrorMessage());
-    }
-
-    //story2 AC3
-    @Test
-    void should_query_message_once_capacity_is_not_enough(){
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car car1=new Car();
-        parkingBoy.park(car1);
-        Car car2=new Car();
-        parkingBoy.park(car2);
-        Car car3=new Car();
-        parkingBoy.park(car3);
-        assertEquals(
-                "The parkingLot capacity is not enough.",
+                "Please provide your parking ticket.",
                 parkingBoy.getLastErrorMessage());
     }
+
+
+    //Story2 AC3
+    @Test
+    void should_get_message_if_there_is_not_enough_position() {
+        final int capacity = 1;
+        ParkingLot parkingLot = new ParkingLot(capacity);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        parkingBoy.park(new Car());
+        parkingBoy.park(new Car());
+
+        assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
+    }
+
 
     //正常停车时错误消息应该置为空
     @Test
@@ -136,17 +141,8 @@ class ParkingBoyFacts {
         assertNull(parkingBoy.getLastErrorMessage());
     }
 
-    @Test
-    void should_not_fetch_any_car_once_ticket_has_been_used() {
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car car = new Car();
 
-        ParkingTicket ticket = parkingBoy.park(car);
-        parkingBoy.fetch(ticket);
 
-        assertNull(parkingBoy.fetch(ticket));
-    }
 
     @Test
     void should_query_error_message_for_used_ticket() {
@@ -159,31 +155,12 @@ class ParkingBoyFacts {
         parkingBoy.fetch(ticket);
 
         assertEquals(
-            "Unrecognized parking ticket.",
-            parkingBoy.getLastErrorMessage()
+                "Unrecognized parking ticket.",
+                parkingBoy.getLastErrorMessage()
         );
     }
-
-    @Test
-    void should_not_park_cars_to_parking_lot_if_there_is_not_enough_position() {
-        final int capacity = 1;
-        ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-
-        parkingBoy.park(new Car());
-
-        assertNull(parkingBoy.park(new Car()));
-    }
-
-    @Test
-    void should_get_message_if_there_is_not_enough_position() {
-        final int capacity = 1;
-        ParkingLot parkingLot = new ParkingLot(capacity);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-
-        parkingBoy.park(new Car());
-        parkingBoy.park(new Car());
-
-        assertEquals("The parking lot is full.", parkingBoy.getLastErrorMessage());
-    }
 }
+
+
+
+

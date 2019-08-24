@@ -10,7 +10,7 @@ public class ParkingLot {
 
     public ParkingLot() {
 
-        this(2);
+        this(10);
     }
 
     public ParkingLot(int capacity) {

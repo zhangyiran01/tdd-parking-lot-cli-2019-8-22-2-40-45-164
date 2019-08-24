@@ -19,7 +19,7 @@ public class ParkingBoy {
     public ParkingTicket park(Car car) {
         ParkingTicket ticket=parkingLot.parkCar(car);
         if(ticket == null){
-            setLastErrorMessage("The parkingLot capacity is not enough.");
+            setLastErrorMessage("The parking lot is full.");
         }
         if(ticket != null){
             setLastErrorMessage(null);
@@ -28,14 +28,16 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) {
+        Car car=new Car();
+        car=parkingLot.fetchCar(ticket);
         if(ticket == null){
             setLastErrorMessage("Please provide your parking ticket.");
             return  null;
         }
-        if(parkingLot.fetchCar(ticket) == null){
+        if(car == null){
             setLastErrorMessage("Unrecognized parking ticket.");
         }
-        return parkingLot.fetchCar(ticket);
+        return car;
     }
 
     public String getLastErrorMessage() {
