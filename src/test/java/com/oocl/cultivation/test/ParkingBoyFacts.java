@@ -240,6 +240,35 @@ class ParkingBoyFacts {
         assertEquals(false,parkingBoyList.contains(parkingBoy));
     }
 
+
+    //story AC3
+    @Test
+    void parkingManager_order_parkingBoy_to_operate_and_return_message(){
+        ParkingLot managerParkingLot = new ParkingLot();
+        ParkingManager parkingManager=new ParkingManager(managerParkingLot);
+        ParkingLot parkingLot1=new ParkingLot(1);
+        ParkingBoy parkingBoy=new ParkingBoy(parkingLot1);
+        List<ParkingBoy> parkingBoyList=parkingManager.add(parkingBoy);
+        Car car1=new Car();
+        Car car2=new Car();
+        ParkingTicket parkingTicket=parkingManager.orderParkCar(parkingBoy,car1);
+        assertNotNull(parkingTicket);
+
+        //超过容量，第二辆车无法停入
+        ParkingTicket parkingTicket1=parkingManager.orderParkCar(parkingBoy,car2);
+        assertEquals("The parking lot is full.",parkingManager.getLastErrorMessage());
+
+        //取车case
+
+        assertSame(car1,parkingManager.orderFetch(parkingBoy,parkingTicket));
+       // assertEquals("Unrecognized parking ticket.",parkingManager.getLastErrorMessage());
+        parkingManager.orderFetch(parkingBoy,null);
+        assertEquals("Please provide your parking ticket.",parkingManager.getLastErrorMessage());
+
+
+
+    }
+
 }
 
 

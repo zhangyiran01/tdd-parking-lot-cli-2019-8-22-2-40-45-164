@@ -16,6 +16,7 @@ public class ParkingManager extends  ParkingBoy {
     }
 
     //构造函数
+
     public ParkingManager(ParkingLot parkingLot) {
         super(parkingLot);
     }
@@ -38,6 +39,23 @@ public class ParkingManager extends  ParkingBoy {
             parkingBoys.remove(parkingBoy);
         }
         return parkingBoys;
+    }
+
+    public ParkingTicket orderParkCar(ParkingBoy parkingBoy,Car car){
+        ParkingTicket parkingTicket=parkingBoy.park(car);
+        if(parkingTicket == null){
+            setLastErrorMessage(parkingBoy.getLastErrorMessage());
+        }
+        return parkingTicket;
+    }
+
+    public Car orderFetch(ParkingBoy parkingBoy,ParkingTicket parkingTicket){
+
+        Car car=parkingBoy.fetch(parkingTicket);
+        if(car == null){
+            setLastErrorMessage(parkingBoy.getLastErrorMessage());
+        }
+        return  car;
     }
 
 }
