@@ -9,7 +9,6 @@ import java.util.Map;
 public class ParkingBoy {
 
     private  ParkingLot parkingLot;
-
     private List<ParkingLot> parkingLots;
     private String lastErrorMessage;
 

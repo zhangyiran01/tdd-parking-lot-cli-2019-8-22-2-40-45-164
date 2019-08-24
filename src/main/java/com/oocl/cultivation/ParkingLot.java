@@ -4,8 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+    //属性
+
     private final int capacity;
     private  int size=0;
+    private Map<ParkingTicket, Car> cars = new HashMap<>();
+
+
+    //getter  setter
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
 
     public Map<ParkingTicket, Car> getCars() {
         return cars;
@@ -14,8 +31,6 @@ public class ParkingLot {
     public void setCars(Map<ParkingTicket, Car> cars) {
         this.cars = cars;
     }
-
-    private Map<ParkingTicket, Car> cars = new HashMap<>();
 
     public ParkingLot() {
 
@@ -27,6 +42,8 @@ public class ParkingLot {
         this.capacity = capacity;
     }
 
+
+    //方法
     public ParkingTicket parkCar(Car car){
         if(size >= this.capacity){
             return null;

@@ -1,9 +1,6 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.Car;
-import com.oocl.cultivation.ParkingBoy;
-import com.oocl.cultivation.ParkingLot;
-import com.oocl.cultivation.ParkingTicket;
+import com.oocl.cultivation.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -179,6 +176,30 @@ class ParkingBoyFacts {
         Map resultMap=parkingBoy.park(carList);
         assertSame(parkingLot1,resultMap.get(car1));
         assertSame(parkingLot2,resultMap.get(car2));
+
+    }
+
+    //story 4
+    @Test
+    void smart_parking_boy (){
+        List<ParkingLot> parkingLots=new ArrayList<>();
+        ParkingLot parkingLot1=new ParkingLot(1);
+        ParkingLot parkingLot2=new ParkingLot(2);
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        SmartParkingBoy smartParkingBoy=new SmartParkingBoy(parkingLots);
+
+        Car car1=new Car();
+        ParkingTicket ticket=smartParkingBoy.park(car1);
+
+
+        assertNotNull(ticket);
+        assertEquals(1,parkingLot2.getSize());
+        assertEquals(0,parkingLot1.getSize());
+
+
+
+
 
     }
 
