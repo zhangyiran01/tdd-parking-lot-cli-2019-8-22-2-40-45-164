@@ -12,15 +12,15 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        // TODO: Please implement the method
         ParkingTicket ticket=parkingLot.parkCar(car);
         return ticket;
     }
 
     public Car fetch(ParkingTicket ticket) {
-        // TODO: Please implement the method
+        if(ticket == null){
+            return  null;
+        }
         return parkingLot.fetchCar(ticket);
-
     }
 
     public String getLastErrorMessage() {

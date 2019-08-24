@@ -43,7 +43,7 @@ class ParkingBoyFacts {
         assertSame(secondCar, fetchedBySecondTicket);
     }
 
-    //story1 AC3
+    //story1 AC3 AC4
     @Test
     void should_not_fetch_any_car_once_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
@@ -56,7 +56,12 @@ class ParkingBoyFacts {
         assertNull(parkingBoy.fetch(null));
         assertNull(parkingBoy.fetch(wrongTicket));
         assertSame(car, parkingBoy.fetch(ticket));
+
+        //如果客户提供已经使用的票证，不应取车
+        Car car2=parkingBoy.fetch(ticket);
+        assertNull(car2);
     }
+
 
     @Test
     void should_query_message_once_the_ticket_is_wrong() {
