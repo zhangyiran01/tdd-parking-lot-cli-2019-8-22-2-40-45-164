@@ -62,6 +62,22 @@ class ParkingBoyFacts {
         assertNull(car2);
     }
 
+    //story1 AC5
+    @Test
+    void should_not_park_if_capacity_not_enough(){
+        ParkingLot parkingLot=new ParkingLot();
+        ParkingBoy parkingBoy=new ParkingBoy(parkingLot);
+        Car car1=new Car();
+        Car car2=new Car();
+        Car car3=new Car();
+        ParkingTicket car1Ticket=parkingBoy.park(car1);
+        ParkingTicket car2Ticket=parkingBoy.park(car2);
+        assertNull(parkingBoy.park(car3));
+
+        parkingBoy.fetch(car1Ticket);
+        assertNotNull(parkingBoy.park(car3));
+    }
+
 
     @Test
     void should_query_message_once_the_ticket_is_wrong() {
