@@ -228,12 +228,16 @@ class ParkingBoyFacts {
     //story 6 AC1
     @Test
     void parkingManger_can_add_or_delete_parkingBoy (){
-        ParkingManager parkingManager=new ParkingManager();
+        ParkingLot managerParkingLot = new ParkingLot();
+        ParkingManager parkingManager=new ParkingManager(managerParkingLot);
         ParkingLot parkingLot1=new ParkingLot();
         ParkingBoy parkingBoy=new ParkingBoy(parkingLot1);
         List<ParkingBoy> parkingBoyList=parkingManager.add(parkingBoy);
 
         assertEquals(true,parkingBoyList.contains(parkingBoy));
+
+        parkingManager.delete(parkingBoy);
+        assertEquals(false,parkingBoyList.contains(parkingBoy));
     }
 
 }
