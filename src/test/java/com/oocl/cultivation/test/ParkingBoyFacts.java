@@ -9,18 +9,23 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingBoyFacts {
+
+    //story1 AC1
     @Test
     void should_park_a_car_to_a_parking_lot_and_get_it_back() {
+        //停车返票
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
-
         ParkingTicket ticket = parkingBoy.park(car);
+
+        //给票取车
         Car fetched = parkingBoy.fetch(ticket);
 
         assertSame(fetched, car);
     }
 
+    //story1 AC2
     @Test
     void should_park_multiple_cars_to_a_parking_lot_and_get_them_back() {
         ParkingLot parkingLot = new ParkingLot();
