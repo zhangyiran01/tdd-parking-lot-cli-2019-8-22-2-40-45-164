@@ -211,17 +211,17 @@ class ParkingBoyFacts {
         parkingLot2.setSize(1);
         parkingLots.add(parkingLot1);
         parkingLots.add(parkingLot2);
-        SuperSmartParkingBoy smartParkingBoy=new SuperSmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy superSmartParkingBoy=new SuperSmartParkingBoy(parkingLots);
 
         Car car1=new Car();
-        ParkingTicket ticket=smartParkingBoy.park(car1);
+        ParkingTicket ticket=superSmartParkingBoy.park(car1);
 
         //停车成功
         assertNotNull(ticket);
-        //停在第二个停车场，则第二个停车场的size+1,应为2
-        assertEquals(2,parkingLot2.getSize());
         //没有停在第一个停车场，所以第一个停车场的size仍为1
-        assertEquals(1,parkingLot1.getSize());
+        assertEquals(1,parkingLot2.getSize());
+        //停在第二个停车场，则第二个停车场的size+1,应为2
+        assertEquals(2,parkingLot1.getSize());
     }
 
 }
