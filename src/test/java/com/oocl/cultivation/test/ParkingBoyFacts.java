@@ -78,7 +78,7 @@ class ParkingBoyFacts {
         assertNotNull(parkingBoy.park(car3));
     }
 
-
+    //story2 AC1
     @Test
     void should_query_message_once_the_ticket_is_wrong() {
         ParkingLot parkingLot = new ParkingLot();
@@ -91,6 +91,37 @@ class ParkingBoyFacts {
         assertEquals("Unrecognized parking ticket.", message);
     }
 
+
+    //story2 AC2
+    @Test
+    void should_query_message_once_ticket_is_not_provided() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        parkingBoy.fetch(null);
+
+        assertEquals(
+            "Please provide your parking ticket.",
+            parkingBoy.getLastErrorMessage());
+    }
+
+    //story2 AC3
+    @Test
+    void should_query_message_once_capacity_is_not_enough(){
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        Car car1=new Car();
+        parkingBoy.park(car1);
+        Car car2=new Car();
+        parkingBoy.park(car2);
+        Car car3=new Car();
+        parkingBoy.park(car3);
+        assertEquals(
+                "The parkingLot capacity is not enough.",
+                parkingBoy.getLastErrorMessage());
+    }
+
+    //正常停车时错误消息应该置为空
     @Test
     void should_clear_the_message_once_the_operation_is_succeeded() {
         ParkingLot parkingLot = new ParkingLot();
@@ -103,30 +134,6 @@ class ParkingBoyFacts {
         ParkingTicket ticket = parkingBoy.park(new Car());
         assertNotNull(ticket);
         assertNull(parkingBoy.getLastErrorMessage());
-    }
-
-    @Test
-    void should_not_fetch_any_car_once_ticket_is_not_provided() {
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car car = new Car();
-
-        ParkingTicket ticket = parkingBoy.park(car);
-
-        assertNull(parkingBoy.fetch(null));
-        assertSame(car, parkingBoy.fetch(ticket));
-    }
-
-    @Test
-    void should_query_message_once_ticket_is_not_provided() {
-        ParkingLot parkingLot = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-
-        parkingBoy.fetch(null);
-
-        assertEquals(
-            "Please provide your parking ticket.",
-            parkingBoy.getLastErrorMessage());
     }
 
     @Test
