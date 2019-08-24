@@ -141,9 +141,6 @@ class ParkingBoyFacts {
         assertNull(parkingBoy.getLastErrorMessage());
     }
 
-
-
-
     @Test
     void should_query_error_message_for_used_ticket() {
         ParkingLot parkingLot = new ParkingLot();
@@ -159,6 +156,9 @@ class ParkingBoyFacts {
                 parkingBoy.getLastErrorMessage()
         );
     }
+
+
+    
 }
 
 
